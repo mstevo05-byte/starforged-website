@@ -1,3 +1,5 @@
+import FightCarousel from './components/FightCarousel';
+
 const navItems = [
   ['THE GAME', '#game'],
   ['BUILD YOUR CHARACTER', '#builds'],
@@ -53,7 +55,7 @@ export default function Home() {
         </nav>
 
         <div className="header-actions">
-          <a className="header-cta" href="#mailing-list">JOIN THE MAILING LIST</a>
+          <a className="header-cta" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD</a>
           <details className="mobile-nav">
             <summary aria-label="Open navigation"><i /><i /><i /></summary>
             <nav aria-label="Mobile navigation">
@@ -75,7 +77,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#game">EXPLORE THE GAME <b aria-hidden="true">&#8595;</b></a>
-            <a className="button button-ghost" href="#mailing-list">JOIN THE MAILING LIST <b aria-hidden="true">&#8595;</b></a>
+            <a className="button button-ghost" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
           </div>
           <p className="hero-tags">
             <span>SCI-FI ACTION RPG</span><i /><span>CHARACTER BUILDING</span><i /><span>DRONES</span><i /><span>PROCEDURAL MISSIONS</span><i /><span>LIVING GALAXY</span>
@@ -130,14 +132,7 @@ export default function Home() {
             <p>Complete Objectives, adapt to the battlefield, recover valuable Artefacts and resources, and extract with what you have earned.</p>
             <PillList items={['Character + Drone', 'Skills', 'Objectives', 'Loot', 'Extraction']} />
           </div>
-          <div className="cinematic-image fight-visual">
-            <img src="/images/Aegies protocol assault.webp" alt="Aegis Protocol forces in combat" loading="lazy" sizes="(max-width: 1080px) 100vw, 60vw" />
-            <img src="/images/Solar reactor assault 1.webp" alt="Combat inside a solar reactor" loading="lazy" sizes="(max-width: 1080px) 100vw, 60vw" />
-            <img src="/images/Faction 7 machine works assault.webp" alt="Assault on a machine works" loading="lazy" sizes="(max-width: 1080px) 100vw, 60vw" />
-            <img src="/images/Solar zealot reactor assault.webp" alt="Solar Zealot reactor assault" loading="lazy" sizes="(max-width: 1080px) 100vw, 60vw" />
-            <span className="image-index">02</span>
-            <span className="cycle-label">FACTION ENCOUNTERS / ROTATING FEED</span>
-          </div>
+          <FightCarousel />
         </article>
         </div>
 
@@ -181,7 +176,7 @@ export default function Home() {
               <h2>Follow the Journey</h2>
               <p>Get development updates, future playtest opportunities and major Starforged Ascendant news.</p>
             </div>
-            <a className="button button-dark" href="#mailing-list">JOIN THE MAILING LIST <b aria-hidden="true">&#8595;</b></a>
+            <a className="button button-dark" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
           </div>
         </aside>
       </section>
@@ -267,7 +262,7 @@ export default function Home() {
         <div className="galaxy-head page-shell">
           <div>
             <p className="section-number">05 / A LIVING GALAXY</p>
-            <h2>What You Do in a Mission<br />Doesnt Stay There.</h2>
+            <h2>What You Do in a Mission<br />Doesn&apos;t Stay There.</h2>
           </div>
           <p>Your victories, failures and alliances feed back into the wider galaxy. Mission outcomes can strengthen your influence, change faction pressure, create new opportunities and help establish the footholds that let you push further.</p>
         </div>
@@ -287,7 +282,7 @@ export default function Home() {
             <p className="section-number light">06 / COMBAT IDENTITIES</p>
             <h2>Every Faction<br />Changes the Fight.</h2>
           </div>
-          <p>Every faction brings its own forces, technology and combat pressure. Learning what youre facing is part of surviving the Mission.</p>
+          <p>Every faction brings its own forces, technology and combat pressure. Learning what you&apos;re facing is part of surviving the Mission.</p>
         </div>
         <div className="combat-gallery">
           {combatImages.map(([src, caption], index) => (
@@ -310,18 +305,12 @@ export default function Home() {
             <h2>Join the Fight</h2>
             <p className="community-lead">Follow development, share feedback and get opportunities to take part as Starforged Ascendant grows.</p>
             <div className="community-actions">
-              <a className="button button-dark" href="#mailing-list">JOIN THE MAILING LIST <b aria-hidden="true">&#8595;</b></a>
-              <span className="coming-soon">DISCORD <small>COMING SOON</small></span>
+              <a className="button button-dark" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
             </div>
-            <form className="mail-form" id="mailing-list">
-              <label htmlFor="email">JOIN THE MAILING LIST</label>
-            {/* TODO: Connect to an approved mailing-list endpoint before enabling submission. */}
-              <div>
-                <input id="email" name="email" type="email" placeholder="you@email.com" autoComplete="email" aria-label="Email address" />
-                <button type="button">JOIN THE MAILING LIST</button>
-              </div>
-              <p>Get development updates, future playtest opportunities and major Starforged Ascendant news.</p>
-            </form>
+            <nav className="community-links" aria-label="Starforged Ascendant community links">
+              <a href="https://www.reddit.com/r/StarforgedAscendant/" target="_blank" rel="noopener noreferrer">REDDIT</a>
+              <a href="https://www.facebook.com/profile.php?id=61593854739318&amp;sk=about" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
+            </nav>
           </div>
         </div>
       </section>
@@ -332,12 +321,15 @@ export default function Home() {
           <nav aria-label="Footer">
             {navItems.map(([label, href]) => <a key={href} href={href}>{label.replace('BUILD YOUR CHARACTER', 'BUILDS')}</a>)}
           </nav>
-          <div className="footer-social"><span>REDDIT <small>COMING SOON</small></span><span>DISCORD <small>COMING SOON</small></span><span>YOUTUBE <small>COMING SOON</small></span><span>CONTACT <small>COMING SOON</small></span></div>
+          <div className="footer-social">
+            <a href="https://www.reddit.com/r/StarforgedAscendant/" target="_blank" rel="noopener noreferrer">REDDIT</a>
+            <a href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">DISCORD</a>
+            <a href="https://www.facebook.com/profile.php?id=61593854739318&amp;sk=about" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
+          </div>
         </div>
         <p className="concept-note page-shell">Concept imagery represents the intended visual direction of Starforged Ascendant.</p>
         <div className="footer-legal page-shell">
           <span>A GAME BY MAJX GAMES</span>
-          <div><span>PRIVACY</span><span>MAILING LIST PRIVACY</span><span>TERMS</span></div>
           <a href="#top">BACK TO TOP &#8593;</a>
         </div>
       </footer>

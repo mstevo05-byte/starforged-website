@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'Starforged Ascendant',
   description: 'Complete the Mission. Shape the Galaxy. Build a classless Character and Drone, complete procedural Missions, and influence a living galaxy.',
   icons: {
-    icon: '/images/SA Logo.png',
+    icon: '/favicon.svg',
   },
   openGraph: {
     title: 'Starforged Ascendant',
