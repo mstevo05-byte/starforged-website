@@ -1,0 +1,51 @@
+# ============================================================
+# Starforged Ascendant Website - Local / Private exclusions
+# ============================================================
+
+# Internal governance / Codex instructions
+/AGENTS.md
+/WEBSITE_REPOSITORY_POLICY.md
+/README.md
+
+# Original/source artwork retained locally.
+# Leading slash is important: ONLY ignore the root Images folder.
+# Do not ignore site/public/images.
+/Images/
+
+/social-preview/
+
+# Temporary repository/tool metadata
+/temp/
+
+# Dependencies
+/node_modules/
+/site/node_modules/
+
+# Generated build output and caches
+/.next/
+/site/.next/
+/site/out/
+/site/dist/
+/dist/
+/build/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+/site/.env
+/site/.env.*
+
+# Logs and caches
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.cache/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
