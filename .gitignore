@@ -10,6 +10,7 @@
 # Original/source artwork retained locally.
 # Leading slash is important: ONLY ignore the root Images folder.
 # Do not ignore site/public/images.
+/Articles/
 /Images/
 
 /social-preview/

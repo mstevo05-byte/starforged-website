@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './home.css';
+import './devlog.css';
 
 const siteUrl = process.env.SITE_URL ? new URL(process.env.SITE_URL) : undefined;
 const socialImage = siteUrl
