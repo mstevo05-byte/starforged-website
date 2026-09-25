@@ -6,7 +6,7 @@ import MarkdownArticle from '../../components/MarkdownArticle';
 import {
   formatDevlogDate,
   getDevlogStaticSlugs,
-  getPublishedDevlogArticle,
+  getVisibleDevlogArticle,
 } from '../../../lib/devlog';
 import { DEVLOG_GROUPS, findDevlogTopic } from '../../../lib/devlog-navigation';
 
@@ -22,11 +22,12 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: DevlogPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = getPublishedDevlogArticle(slug);
+  const article = getVisibleDevlogArticle(slug);
   if (article) {
     return {
       title: article.title + ' | Starforged Ascendant Devlog',
       description: article.summary,
+      robots: article.status === 'draft' ? { index: false, follow: false } : undefined,
     };
   }
 
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: DevlogPageProps): Promise<Met
 
 export default async function DevlogPage({ params }: DevlogPageProps) {
   const { slug } = await params;
-  const article = getPublishedDevlogArticle(slug);
+  const article = getVisibleDevlogArticle(slug);
   if (article) {
     const configuredTopic = findDevlogTopic(slug);
     const articleGroup = configuredTopic?.group ?? DEVLOG_GROUPS.find((group) => group.key === article.category);

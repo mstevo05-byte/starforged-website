@@ -187,6 +187,13 @@
 .devlog-prose ul,
 .devlog-prose ol { margin: 0 0 30px; padding-left: 28px; color: #34413f; font-family: Georgia, 'Times New Roman', serif; font-size: 19px; line-height: 1.75; }
 .devlog-prose blockquote { margin: 45px 0; padding: 8px 0 8px 28px; border-left: 4px solid var(--solar); color: #263431; font-family: Manrope, Inter, Arial, sans-serif; font-size: 26px; font-weight: 700; line-height: 1.45; }
+.devlog-table-wrap { margin: 12px 0 42px; overflow-x: auto; border: 1px solid rgba(16,25,24,.2); background: rgba(255,255,255,.52); }
+.devlog-prose table { width: 100%; min-width: 600px; border-collapse: collapse; color: #34413f; font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.55; }
+.devlog-prose th,
+.devlog-prose td { padding: 16px 18px; border-bottom: 1px solid rgba(16,25,24,.14); text-align: left; vertical-align: top; }
+.devlog-prose th { background: #101918; color: white; font-family: Inter, Arial, sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.devlog-prose tbody tr:last-child td { border-bottom: 0; }
+.devlog-prose td:first-child { width: 31%; color: var(--ink); }
 .devlog-article-image { width: calc(100% + 170px); margin: 62px 0 74px -85px; background: #101a1b; border: 1px solid rgba(16,25,24,.22); box-shadow: 0 26px 55px rgba(16,25,24,.12); }
 .devlog-article-image img { width: 100%; }
 .devlog-article-end { margin-bottom: 120px; padding: 64px; background: #dfe9e8; border-left: 8px solid var(--solar); }
@@ -241,6 +248,10 @@
   .devlog-prose > p { font-size: 17px; line-height: 1.75; }
   .devlog-prose > p:first-child { font-size: 19px; }
   .devlog-prose h2 { margin-top: 65px; font-size: 42px; }
+  .devlog-table-wrap { margin-bottom: 34px; }
+  .devlog-prose table { min-width: 540px; font-size: 16px; }
+  .devlog-prose th,
+  .devlog-prose td { padding: 14px; }
   .devlog-article-image { margin: 44px 0 55px; }
   .devlog-article-end { width: calc(100% - 36px); margin-bottom: 75px; padding: 40px 25px; border-left-width: 5px; }
   .devlog-coming-soon { min-height: 760px; padding-top: 135px; }

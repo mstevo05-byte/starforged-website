@@ -27,11 +27,20 @@ function isBlockStart(line: string) {
   const patterns = [
     /^(#{1,3})\s+/,
     /^!\[[^\]]*\]\([^)]+\)$/,
+    /^\|.*\|$/,
     /^>\s?/,
     /^[-*]\s+/,
     /^\d+\.\s+/,
   ];
   return patterns.some((pattern) => pattern.test(line));
+}
+
+function splitTableRow(line: string) {
+  return line
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((cell) => cell.trim());
 }
 
 export default function MarkdownArticle({ source }: { source: string }) {
@@ -64,6 +73,32 @@ export default function MarkdownArticle({ source }: { source: string }) {
         </figure>,
       );
       index += 1;
+      continue;
+    }
+
+    const nextLine = lines[index + 1]?.trim() ?? '';
+    if (/^\|.*\|$/.test(line) && /^\|(?:\s*:?-+:?\s*\|)+$/.test(nextLine)) {
+      const header = splitTableRow(line);
+      const rows: string[][] = [];
+      index += 2;
+      while (index < lines.length && /^\|.*\|$/.test(lines[index].trim())) {
+        rows.push(splitTableRow(lines[index].trim()));
+        index += 1;
+      }
+      blocks.push(
+        <div className='devlog-table-wrap' key={'table-' + index}>
+          <table>
+            <thead>
+              <tr>{header.map((cell, cellIndex) => <th key={cellIndex}>{renderInline(cell)}</th>)}</tr>
+            </thead>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{renderInline(cell)}</td>)}</tr>
+              ))}
+            </tbody>
+          </table>
+        </div>,
+      );
       continue;
     }
 

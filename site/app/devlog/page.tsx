@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { DevlogFooter, DevlogHeader } from '../components/DevlogChrome';
-import { formatDevlogDate, getDevlogDirectory, getPublishedDevlogArticles } from '../../lib/devlog';
+import { formatDevlogDate, getDevlogDirectory, getVisibleDevlogArticles } from '../../lib/devlog';
 
 export const metadata: Metadata = {
   title: 'Devlog | Starforged Ascendant',
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default function DevlogIndex() {
-  const articles = getPublishedDevlogArticles();
+  const articles = getVisibleDevlogArticles();
   const directory = getDevlogDirectory();
   const featured = articles[0];
 
@@ -32,7 +32,7 @@ export default function DevlogIndex() {
             <span>DEVLOG {featured.number ?? '01'}</span>
           </a>
           <div className='devlog-featured-copy'>
-            <p className='section-number'>LATEST DEVLOG / {formatDevlogDate(featured.date)}</p>
+            <p className='section-number'>{featured.status === 'draft' ? 'DRAFT PREVIEW' : 'LATEST DEVLOG'} / {formatDevlogDate(featured.date)}</p>
             <h2 id='featured-devlog-title'>{featured.title}</h2>
             <p>{featured.summary}</p>
             <a className='button button-dark' href={'/devlog/' + featured.slug + '/'}>READ DEVLOG <b aria-hidden='true'>&#8594;</b></a>
@@ -56,8 +56,8 @@ export default function DevlogIndex() {
               </header>
               <div className='devlog-topic-list'>
                 {group.entries.map((entry) => (
-                  <a className={entry.published ? 'devlog-topic is-published' : 'devlog-topic'} href={'/devlog/' + entry.slug + '/'} key={entry.slug}>
-                    <span className='devlog-topic-status'>{entry.published ? 'PUBLISHED' : 'COMING SOON'}</span>
+                  <a className={entry.status !== 'upcoming' ? 'devlog-topic is-published' : 'devlog-topic'} href={'/devlog/' + entry.slug + '/'} key={entry.slug}>
+                    <span className='devlog-topic-status'>{entry.status === 'draft' ? 'DRAFT PREVIEW' : entry.status === 'published' ? 'PUBLISHED' : 'COMING SOON'}</span>
                     <strong>{entry.title}</strong>
                     <span className='devlog-topic-arrow' aria-hidden='true'>&#8594;</span>
                   </a>

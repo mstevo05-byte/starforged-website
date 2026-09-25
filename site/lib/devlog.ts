@@ -19,7 +19,7 @@ export type DevlogDirectoryEntry = {
   slug: string;
   summary?: string;
   date?: string;
-  published: boolean;
+  status: 'published' | 'draft' | 'upcoming';
 };
 
 const contentDirectory = path.join(process.cwd(), 'content', 'devlog');
@@ -85,23 +85,32 @@ function readArticle(filePath: string): DevlogArticle {
   };
 }
 
-export function getPublishedDevlogArticles() {
+function getDevlogArticles() {
   if (!fs.existsSync(contentDirectory)) return [];
 
   return fs
     .readdirSync(contentDirectory)
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => readArticle(path.join(contentDirectory, fileName)))
-    .filter((article) => article.status === 'published')
     .sort((first, second) => second.date.localeCompare(first.date));
 }
 
-export function getPublishedDevlogArticle(slug: string) {
-  return getPublishedDevlogArticles().find((article) => article.slug === slug);
+function includeDrafts() {
+  return process.env.NODE_ENV !== 'production' || process.env.STARFORGED_DEVLOG_PREVIEW === '1';
+}
+
+export function getVisibleDevlogArticles() {
+  return getDevlogArticles().filter(
+    (article) => article.status === 'published' || (article.status === 'draft' && includeDrafts()),
+  );
+}
+
+export function getVisibleDevlogArticle(slug: string) {
+  return getVisibleDevlogArticles().find((article) => article.slug === slug);
 }
 
 export function getDevlogDirectory() {
-  const articles = getPublishedDevlogArticles();
+  const articles = getVisibleDevlogArticles();
 
   return DEVLOG_GROUPS.map((group) => {
     const configuredSlugs = new Set(group.topics.map((topic) => topic.slug));
@@ -113,9 +122,9 @@ export function getDevlogDirectory() {
             slug: article.slug,
             summary: article.summary,
             date: article.date,
-            published: true,
+            status: article.status === 'draft' ? 'draft' : 'published',
           }
-        : { title: topic.title, slug: topic.slug, published: false };
+        : { title: topic.title, slug: topic.slug, status: 'upcoming' };
     });
 
     for (const article of articles) {
@@ -126,7 +135,7 @@ export function getDevlogDirectory() {
         slug: article.slug,
         summary: article.summary,
         date: article.date,
-        published: true,
+        status: article.status === 'draft' ? 'draft' : 'published',
       });
     }
 
@@ -136,7 +145,7 @@ export function getDevlogDirectory() {
 
 export function getDevlogStaticSlugs() {
   const slugs = new Set(DEVLOG_GROUPS.flatMap((group) => group.topics.map((topic) => topic.slug)));
-  for (const article of getPublishedDevlogArticles()) slugs.add(article.slug);
+  for (const article of getVisibleDevlogArticles()) slugs.add(article.slug);
   return [...slugs];
 }
 

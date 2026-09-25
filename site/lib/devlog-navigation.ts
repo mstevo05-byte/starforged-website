@@ -31,7 +31,7 @@ export const DEVLOG_GROUPS: readonly DevlogGroup[] = [
     key: 'buildcraft',
     title: 'Buildcraft',
     topics: [
-      { title: 'Artefacts & Skills', slug: 'artefacts-and-skills' },
+      { title: 'How Artefacts Shape Your Combat Kit', slug: 'how-artefacts-shape-your-combat-kit' },
       { title: 'Power Cores', slug: 'power-cores' },
       { title: 'Talents', slug: 'talents' },
       { title: 'Augments', slug: 'augments' },
