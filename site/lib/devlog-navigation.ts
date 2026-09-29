@@ -1,6 +1,7 @@
 export type DevlogTopic = {
   title: string;
   slug: string;
+  articleSlug?: string;
 };
 
 export type DevlogGroup = {
@@ -22,9 +23,9 @@ export const DEVLOG_GROUPS: readonly DevlogGroup[] = [
     key: 'gameplay',
     title: 'Gameplay',
     topics: [
-      { title: 'Missions', slug: 'missions' },
-      { title: 'Combat', slug: 'combat' },
-      { title: 'Progression', slug: 'progression' },
+      { title: 'Missions', slug: 'missions', articleSlug: 'inside-a-mission' },
+      { title: 'Combat', slug: 'combat', articleSlug: 'how-combat-works-in-starforged-ascendant' },
+      { title: 'Progression', slug: 'progression', articleSlug: 'progression-through-missions' },
     ],
   },
   {
@@ -32,19 +33,20 @@ export const DEVLOG_GROUPS: readonly DevlogGroup[] = [
     title: 'Buildcraft',
     topics: [
       { title: 'How Artefacts Shape Your Combat Kit', slug: 'how-artefacts-shape-your-combat-kit' },
-      { title: 'Power Cores', slug: 'power-cores' },
-      { title: 'Talents', slug: 'talents' },
-      { title: 'Augments', slug: 'augments' },
-      { title: 'Builds', slug: 'builds' },
+      { title: 'Power Cores', slug: 'power-cores', articleSlug: 'power-cores-change-your-skills' },
+      { title: 'Talents', slug: 'talents', articleSlug: '21-talent-trees-one-character' },
+      { title: 'Crafting', slug: 'crafting', articleSlug: 'crafting-the-items-you-want-to-keep' },
+      { title: 'Augments', slug: 'augments', articleSlug: 'augments-make-skills-behave-differently' },
+      { title: 'Builds', slug: 'builds', articleSlug: 'building-a-complete-character' },
     ],
   },
   {
     key: 'character-and-drone',
     title: 'Character & Drone',
     topics: [
-      { title: 'Character', slug: 'character' },
-      { title: 'Drone', slug: 'drone' },
-      { title: 'Merge', slug: 'merge' },
+      { title: 'Character', slug: 'character', articleSlug: 'building-your-character-through-stats' },
+      { title: 'Drone', slug: 'drone', articleSlug: 'your-drone-is-part-of-your-build' },
+      { title: 'Merge', slug: 'merge', articleSlug: 'merge-when-character-and-drone-become-one' },
     ],
   },
   {
@@ -70,9 +72,14 @@ export const DEVLOG_GROUPS: readonly DevlogGroup[] = [
 
 export function findDevlogTopic(slug: string) {
   for (const group of DEVLOG_GROUPS) {
-    const topic = group.topics.find((entry) => entry.slug === slug);
+    const topic = group.topics.find((entry) => entry.slug === slug || entry.articleSlug === slug);
     if (topic) return { group, topic };
   }
 
   return undefined;
+}
+
+export function findDevlogGroupByCategory(category: string) {
+  const groupKey = category === 'character-drone' ? 'character-and-drone' : category;
+  return DEVLOG_GROUPS.find((group) => group.key === groupKey);
 }

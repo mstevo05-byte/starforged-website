@@ -1,11 +1,14 @@
 import type { ReactNode } from 'react';
 
 function renderInline(source: string): ReactNode[] {
-  const tokens = source.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
+  const tokens = source.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
 
   return tokens.filter(Boolean).map((token, index) => {
     const strong = token.match(/^\*\*(.+)\*\*$/);
     if (strong) return <strong key={index}>{strong[1]}</strong>;
+
+    const emphasis = token.match(/^\*(.+)\*$/);
+    if (emphasis) return <em key={index}>{emphasis[1]}</em>;
 
     const code = token.match(/^`(.+)`$/);
     if (code) return <code key={index}>{code[1]}</code>;

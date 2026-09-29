@@ -8,7 +8,7 @@ import {
   getDevlogStaticSlugs,
   getVisibleDevlogArticle,
 } from '../../../lib/devlog';
-import { DEVLOG_GROUPS, findDevlogTopic } from '../../../lib/devlog-navigation';
+import { findDevlogGroupByCategory, findDevlogTopic } from '../../../lib/devlog-navigation';
 
 type DevlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -44,7 +44,7 @@ export default async function DevlogPage({ params }: DevlogPageProps) {
   const article = getVisibleDevlogArticle(slug);
   if (article) {
     const configuredTopic = findDevlogTopic(slug);
-    const articleGroup = configuredTopic?.group ?? DEVLOG_GROUPS.find((group) => group.key === article.category);
+    const articleGroup = configuredTopic?.group ?? findDevlogGroupByCategory(article.category);
 
     return (
       <main className='devlog-page devlog-article-page' id='top'>
@@ -59,7 +59,7 @@ export default async function DevlogPage({ params }: DevlogPageProps) {
               <p className='section-number light'>DEVLOG {article.number ?? '01'} / {articleGroup?.title ?? 'DEVELOPMENT'}</p>
               <h1>{article.title}</h1>
               <p className='devlog-article-summary'>{article.summary}</p>
-              <time dateTime={article.date}>{formatDevlogDate(article.date)}</time>
+              {article.date ? <time dateTime={article.date}>{formatDevlogDate(article.date)}</time> : null}
             </div>
           </header>
 

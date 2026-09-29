@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEVLOG_GROUPS } from './devlog-navigation';
+import { DEVLOG_GROUPS, findDevlogGroupByCategory } from './devlog-navigation';
 
 export type DevlogArticle = {
   title: string;
@@ -23,6 +23,38 @@ export type DevlogDirectoryEntry = {
 };
 
 const contentDirectory = path.join(process.cwd(), 'content', 'devlog');
+
+const ARTICLE_04_IMAGE_ROOT = '/images/devlog/21-talent-trees-one-character/';
+const DEVLOG_MEDIA: Record<string, {
+  heroImage?: string;
+  insertions?: readonly { before: string; fileName: string; alt: string }[];
+}> = {
+  '21-talent-trees-one-character': {
+    heroImage: ARTICLE_04_IMAGE_ROOT + 'sa-devlog-04-21-talent-trees-one-character-01-hero.jpg',
+    insertions: [
+      {
+        before: '## Five Weapon Trees',
+        fileName: 'sa-devlog-04-21-talent-trees-one-character-02-primary-stat-builds.jpg',
+        alt: 'The seven Primary Stat Talent Trees',
+      },
+      {
+        before: '## Five Power Trees',
+        fileName: 'sa-devlog-04-21-talent-trees-one-character-03-weapon-armour-paths.jpg',
+        alt: 'Weapon and Armour Talent paths',
+      },
+      {
+        before: 'Talent Trees open progressively as points are invested',
+        fileName: 'sa-devlog-04-21-talent-trees-one-character-04-power-and-drone-talents.jpg',
+        alt: 'Power and Drone Talent Trees',
+      },
+      {
+        before: 'A Rifle Character might invest heavily into Rifles and Reflex',
+        fileName: 'sa-devlog-04-21-talent-trees-one-character-05-example-talent-builds.jpg',
+        alt: 'Example combinations drawn from the Talent Trees',
+      },
+    ],
+  },
+};
 
 function unquote(value: string) {
   const trimmed = value.trim();
@@ -62,9 +94,40 @@ function parseFrontmatter(source: string) {
   };
 }
 
+function stripLeadingTitle(body: string, title: string) {
+  const lines = body.split('\n');
+  if (lines[0]?.trim() === '# ' + title) {
+    return lines.slice(1).join('\n').trim();
+  }
+  return body;
+}
+
+function deriveSummary(body: string) {
+  const paragraph = body
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .find((block) => block && !/^(#{1,6}|[-*] |\d+\. |>|!\[|\|)/.test(block));
+
+  return (paragraph ?? 'A Starforged Ascendant development article.')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\s+/g, ' ');
+}
+
+function applyDevlogMedia(slug: string, body: string) {
+  const media = DEVLOG_MEDIA[slug];
+  if (!media?.insertions) return body;
+
+  return media.insertions.reduce((result, insertion) => {
+    const image = '![' + insertion.alt + '](' + ARTICLE_04_IMAGE_ROOT + insertion.fileName + ')\n\n';
+    return result.replace(insertion.before, image + insertion.before);
+  }, body);
+}
+
 function readArticle(filePath: string): DevlogArticle {
   const { attributes, body } = parseFrontmatter(fs.readFileSync(filePath, 'utf8'));
-  const requiredFields = ['title', 'slug', 'date', 'summary', 'category', 'status'] as const;
+  const requiredFields = ['title', 'slug', 'category', 'status'] as const;
 
   for (const field of requiredFields) {
     if (!attributes[field]) {
@@ -72,16 +135,20 @@ function readArticle(filePath: string): DevlogArticle {
     }
   }
 
+  const articleBody = stripLeadingTitle(body, attributes.title);
+  const fileNumber = path.basename(filePath).match(/^(\d+)-/)?.[1];
+  const media = DEVLOG_MEDIA[attributes.slug];
+
   return {
     title: attributes.title,
     slug: attributes.slug,
-    date: attributes.date,
-    summary: attributes.summary,
+    date: attributes.date ?? '',
+    summary: attributes.summary ?? deriveSummary(articleBody),
     category: attributes.category,
     status: attributes.status,
-    number: attributes.number,
-    heroImage: attributes.hero_image,
-    body,
+    number: attributes.number ?? fileNumber,
+    heroImage: attributes.hero_image ?? media?.heroImage,
+    body: applyDevlogMedia(attributes.slug, articleBody),
   };
 }
 
@@ -92,7 +159,10 @@ function getDevlogArticles() {
     .readdirSync(contentDirectory)
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => readArticle(path.join(contentDirectory, fileName)))
-    .sort((first, second) => second.date.localeCompare(first.date));
+    .sort((first, second) => {
+      const numberDifference = Number(second.number ?? 0) - Number(first.number ?? 0);
+      return numberDifference || second.date.localeCompare(first.date);
+    });
 }
 
 function includeDrafts() {
@@ -113,9 +183,12 @@ export function getDevlogDirectory() {
   const articles = getVisibleDevlogArticles();
 
   return DEVLOG_GROUPS.map((group) => {
-    const configuredSlugs = new Set(group.topics.map((topic) => topic.slug));
+    const configuredSlugs = new Set(
+      group.topics.flatMap((topic) => topic.articleSlug ? [topic.slug, topic.articleSlug] : [topic.slug]),
+    );
     const entries: DevlogDirectoryEntry[] = group.topics.map((topic) => {
-      const article = articles.find((candidate) => candidate.slug === topic.slug);
+      const articleSlug = topic.articleSlug ?? topic.slug;
+      const article = articles.find((candidate) => candidate.slug === articleSlug);
       return article
         ? {
             title: topic.title,
@@ -128,7 +201,7 @@ export function getDevlogDirectory() {
     });
 
     for (const article of articles) {
-      if (article.category !== group.key) continue;
+      if (findDevlogGroupByCategory(article.category)?.key !== group.key) continue;
       if (configuredSlugs.has(article.slug)) continue;
       entries.push({
         title: article.title,
@@ -144,7 +217,9 @@ export function getDevlogDirectory() {
 }
 
 export function getDevlogStaticSlugs() {
-  const slugs = new Set(DEVLOG_GROUPS.flatMap((group) => group.topics.map((topic) => topic.slug)));
+  const slugs = new Set(
+    DEVLOG_GROUPS.flatMap((group) => group.topics.map((topic) => topic.articleSlug ?? topic.slug)),
+  );
   for (const article of getVisibleDevlogArticles()) slugs.add(article.slug);
   return [...slugs];
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function DevlogIndex() {
   const articles = getVisibleDevlogArticles();
   const directory = getDevlogDirectory();
-  const featured = articles[0];
+  const featured = articles.find((article) => article.heroImage) ?? articles[0];
 
   return (
     <main className='devlog-page' id='top'>
@@ -32,7 +32,10 @@ export default function DevlogIndex() {
             <span>DEVLOG {featured.number ?? '01'}</span>
           </a>
           <div className='devlog-featured-copy'>
-            <p className='section-number'>{featured.status === 'draft' ? 'DRAFT PREVIEW' : 'LATEST DEVLOG'} / {formatDevlogDate(featured.date)}</p>
+            <p className='section-number'>
+              {featured.status === 'draft' ? 'DRAFT PREVIEW' : 'LATEST DEVLOG'}
+              {featured.date ? ' / ' + formatDevlogDate(featured.date) : ''}
+            </p>
             <h2 id='featured-devlog-title'>{featured.title}</h2>
             <p>{featured.summary}</p>
             <a className='button button-dark' href={'/devlog/' + featured.slug + '/'}>READ DEVLOG <b aria-hidden='true'>&#8594;</b></a>
