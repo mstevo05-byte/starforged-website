@@ -3,7 +3,7 @@ layout: devlog
 title: "Merge: When Character and Drone Become One"
 slug: merge-when-character-and-drone-become-one
 category: character-drone
-status: draft
+status: published
 ---
 
 # Merge: When Character and Drone Become One

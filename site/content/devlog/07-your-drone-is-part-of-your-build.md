@@ -3,7 +3,7 @@ layout: devlog
 title: "Your Drone Is Part of Your Build"
 slug: your-drone-is-part-of-your-build
 category: character-drone
-status: draft
+status: published
 ---
 
 # Your Drone Is Part of Your Build

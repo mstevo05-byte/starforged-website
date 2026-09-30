@@ -3,7 +3,7 @@ layout: devlog
 title: "Building Your Character Through Stats"
 slug: building-your-character-through-stats
 category: character-drone
-status: draft
+status: published
 ---
 
 # Building Your Character Through Stats

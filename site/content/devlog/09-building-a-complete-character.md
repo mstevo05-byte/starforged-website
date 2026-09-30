@@ -3,7 +3,7 @@ layout: devlog
 title: "Building a Complete Character"
 slug: building-a-complete-character
 category: buildcraft
-status: draft
+status: published
 ---
 
 # Building a Complete Character

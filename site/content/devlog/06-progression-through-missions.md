@@ -3,7 +3,7 @@ layout: devlog
 title: "Progression Through Missions"
 slug: progression-through-missions
 category: gameplay
-status: draft
+status: published
 ---
 
 # Progression Through Missions

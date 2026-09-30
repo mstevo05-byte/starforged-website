@@ -3,7 +3,7 @@ layout: devlog
 title: "Power Cores Change Your Skills"
 slug: power-cores-change-your-skills
 category: buildcraft
-status: draft
+status: published
 ---
 
 # Power Cores Change Your Skills

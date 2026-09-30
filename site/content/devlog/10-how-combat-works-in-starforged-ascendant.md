@@ -3,7 +3,7 @@ layout: devlog
 title: "How Combat Works in Starforged Ascendant"
 slug: how-combat-works-in-starforged-ascendant
 category: gameplay
-status: draft
+status: published
 ---
 
 # How Combat Works in Starforged Ascendant

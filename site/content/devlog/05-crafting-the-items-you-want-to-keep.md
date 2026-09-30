@@ -3,7 +3,7 @@ layout: devlog
 title: "Crafting the Items You Want to Keep"
 slug: crafting-the-items-you-want-to-keep
 category: buildcraft
-status: draft
+status: published
 ---
 
 # Crafting the Items You Want to Keep

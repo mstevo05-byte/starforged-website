@@ -3,7 +3,7 @@ layout: devlog
 title: "21 Talent Trees, One Character"
 slug: 21-talent-trees-one-character
 category: buildcraft
-status: draft
+status: published
 ---
 
 # 21 Talent Trees, One Character

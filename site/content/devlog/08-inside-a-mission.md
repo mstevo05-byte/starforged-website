@@ -3,7 +3,7 @@ layout: devlog
 title: "Inside a Mission"
 slug: inside-a-mission
 category: gameplay
-status: draft
+status: published
 ---
 
 # Inside a Mission
