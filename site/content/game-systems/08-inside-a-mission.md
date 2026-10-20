@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Inside a Mission"
 slug: inside-a-mission
 category: gameplay

@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Building Your Character Through Stats"
 slug: building-your-character-through-stats
 category: character-drone

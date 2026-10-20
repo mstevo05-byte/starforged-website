@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "21 Talent Trees, One Character"
 slug: 21-talent-trees-one-character
 category: buildcraft

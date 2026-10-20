@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Building a Complete Character"
 slug: building-a-complete-character
 category: buildcraft

@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 number: 01
 title: What is Starforged Ascendant?
 date: 2026-09-19

@@ -262,3 +262,48 @@
 @media (prefers-reduced-motion: reduce) {
   .devlog-featured-image img { transition: none; }
 }
+
+/* Shared content navigation and the separate Game Systems / Devlog directories. */
+.site-header .desktop-nav { gap: clamp(14px, 1.4vw, 25px); }
+@media (min-width: 1081px) and (max-width: 1430px) {
+  .site-header { grid-template-columns: 1fr auto; padding: 0 26px; }
+  .site-header .desktop-nav { display: none; }
+  .site-header .mobile-nav { display: block; }
+}
+.devlog-group > header h2 { margin: 48px 0 0; font-family: Manrope, Inter, Arial, sans-serif; font-size: 34px; line-height: 1.05; }
+.devlog-directory-intro a { color: var(--solar); text-decoration: underline; text-underline-offset: 4px; }
+.system-card { gap: 18px; justify-content: flex-start; padding: 26px 30px 56px; }
+.system-card-summary { color: rgba(255,255,255,.68); font-size: 14px; line-height: 1.65; }
+.system-card:hover .system-card-summary { color: #34413f; }
+.content-empty { padding: clamp(28px, 5vw, 64px); border: 1px solid var(--line); }
+.content-empty h3 { margin: 0 0 16px; font-size: clamp(26px, 4vw, 40px); line-height: 1.2; }
+.content-empty p { max-width: 650px; color: rgba(255,255,255,.68); margin-bottom: 30px; }
+.devlog-post-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+.devlog-post-card { min-width: 0; background: var(--paper); color: var(--ink); border: 1px solid var(--dark-line); }
+.devlog-post-card > a { display: block; }
+.devlog-post-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.devlog-post-copy { padding: clamp(24px, 3vw, 40px); }
+.devlog-post-copy h3 { margin: 20px 0; font-size: clamp(26px, 3vw, 40px); line-height: 1.1; letter-spacing: -.025em; }
+.devlog-post-copy h3 a:hover, .related-system-list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.devlog-post-copy > p:not(.section-number) { color: #34413f; }
+.devlog-post-copy .devlog-scroll-link { color: #9b5d00; margin-top: 22px; }
+.article-tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 20px 0 0; }
+.article-tags li { padding: 5px 10px; border: 1px solid currentColor; font-size: 11px; }
+.article-end-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.devlog-article-end .devlog-post-grid { margin: 30px 0; }
+.related-system-list { list-style: none; padding: 0; margin: 30px 0; }
+.related-system-list a { display: flex; justify-content: space-between; gap: 22px; padding: 20px 0; border-bottom: 1px solid var(--dark-line); font-size: 20px; font-weight: 700; }
+@media (max-width: 700px) {
+  .devlog-group > header h2 { margin: 15px 0 0; font-size: 29px; }
+  .devlog-post-grid { grid-template-columns: 1fr; }
+  .article-end-actions { flex-direction: column; }
+}
+
+.devlog-site-header { color: white; }
+.devlog-article-hero h1 { overflow-wrap: anywhere; }
+@media (max-width: 700px) {
+  .devlog-article-hero h1 { font-size: clamp(42px, 11.5vw, 68px); }
+}
+@media (max-width: 700px) {
+  .devlog-index-hero h1 { font-size: clamp(48px, 15vw, 76px); }
+}

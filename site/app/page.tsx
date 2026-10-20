@@ -5,6 +5,7 @@ const navItems = [
   ['BUILD YOUR CHARACTER', '#builds'],
   ['THE GALAXY', '#galaxy'],
   ['FACTIONS', '#factions'],
+  ['GAME SYSTEMS', '/game-systems/'],
   ['DEVLOG', '/devlog/'],
   ['COMMUNITY', '#community'],
 ];

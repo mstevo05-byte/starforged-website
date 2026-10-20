@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Power Cores Change Your Skills"
 slug: power-cores-change-your-skills
 category: buildcraft

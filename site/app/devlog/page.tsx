@@ -1,77 +1,44 @@
 import type { Metadata } from 'next';
-import { DevlogFooter, DevlogHeader } from '../components/DevlogChrome';
-import { formatDevlogDate, getDevlogDirectory, getVisibleDevlogArticles } from '../../lib/devlog';
+import Link from 'next/link';
+import { SiteFooter, SiteHeader } from '../components/SiteChrome';
+import DevlogCards from '../components/DevlogCards';
+import { getVisibleDevlogArticles } from '../../lib/devlog';
 
 export const metadata: Metadata = {
   title: 'Devlog | Starforged Ascendant',
-  description: 'Development articles about the systems, worlds and production of Starforged Ascendant.',
+  description: 'Chronological development updates: implementation work, problems, decisions, outcomes and remaining work on Starforged Ascendant.',
 };
 
 export default function DevlogIndex() {
-  const articles = getVisibleDevlogArticles();
-  const directory = getDevlogDirectory();
-  const featured = articles.find((article) => article.heroImage) ?? articles[0];
-
+  const posts = getVisibleDevlogArticles();
   return (
     <main className='devlog-page' id='top'>
-      <DevlogHeader />
-
+      <SiteHeader section='devlog' />
       <section className='devlog-index-hero'>
         <div className='page-shell'>
           <p className='section-number light'>STARFORGED ASCENDANT / DEVLOG</p>
           <h1>Building the<br /><span>Galaxy.</span></h1>
-          <p>Development articles about the game, its connected systems and the work taking Starforged Ascendant forward.</p>
-          <a className='devlog-scroll-link' href='#devlog-directory'>EXPLORE THE DEVLOG <b aria-hidden='true'>&#8595;</b></a>
+          <p>Follow development as it happens: the work, the problems, the decisions and what comes next. Newest posts appear first.</p>
+          <a className='devlog-scroll-link' href='#devlog-directory'>READ DEVELOPMENT UPDATES <b aria-hidden='true'>&#8595;</b></a>
         </div>
       </section>
-
-      {featured ? (
-        <section className='devlog-featured page-shell' aria-labelledby='featured-devlog-title'>
-          <a className='devlog-featured-image' href={'/devlog/' + featured.slug + '/'}>
-            {featured.heroImage ? <img src={featured.heroImage} alt='' /> : null}
-            <span>DEVLOG {featured.number ?? '01'}</span>
-          </a>
-          <div className='devlog-featured-copy'>
-            <p className='section-number'>
-              {featured.status === 'draft' ? 'DRAFT PREVIEW' : 'LATEST DEVLOG'}
-              {featured.date ? ' / ' + formatDevlogDate(featured.date) : ''}
-            </p>
-            <h2 id='featured-devlog-title'>{featured.title}</h2>
-            <p>{featured.summary}</p>
-            <a className='button button-dark' href={'/devlog/' + featured.slug + '/'}>READ DEVLOG <b aria-hidden='true'>&#8594;</b></a>
-          </div>
-        </section>
-      ) : null}
-
-      <section className='devlog-directory' id='devlog-directory'>
+      <section className='devlog-directory' id='devlog-directory' aria-labelledby='development-updates-title'>
         <div className='devlog-directory-intro page-shell'>
-          <p className='section-number light'>DEVLOG DIRECTORY</p>
-          <h2>Explore by topic.</h2>
-          <p>Published articles and the subjects planned for future Devlogs, organised around the game.</p>
+          <p className='section-number light'>DEVELOPMENT UPDATES</p>
+          <h2 id='development-updates-title'>The latest work.</h2>
+          <p>Looking for explanations of how the game works? Explore <Link href='/game-systems/'>Game Systems</Link>.</p>
         </div>
-
-        <div className='devlog-groups page-shell'>
-          {directory.map((group, groupIndex) => (
-            <section className='devlog-group' key={group.key} aria-labelledby={'devlog-group-' + group.key}>
-              <header>
-                <span>{String(groupIndex + 1).padStart(2, '0')}</span>
-                <h3 id={'devlog-group-' + group.key}>{group.title}</h3>
-              </header>
-              <div className='devlog-topic-list'>
-                {group.entries.map((entry) => (
-                  <a className={entry.status !== 'upcoming' ? 'devlog-topic is-published' : 'devlog-topic'} href={'/devlog/' + entry.slug + '/'} key={entry.slug}>
-                    <span className='devlog-topic-status'>{entry.status === 'draft' ? 'DRAFT PREVIEW' : entry.status === 'published' ? 'PUBLISHED' : 'COMING SOON'}</span>
-                    <strong>{entry.title}</strong>
-                    <span className='devlog-topic-arrow' aria-hidden='true'>&#8594;</span>
-                  </a>
-                ))}
-              </div>
-            </section>
-          ))}
+        <div className='page-shell'>
+          {posts.length ? <DevlogCards posts={posts} /> : (
+            <div className='content-empty'>
+              <h3>No development posts published yet.</h3>
+              <p>Future Devlogs will cover implementation work, problems, decisions, outcomes and remaining work.</p>
+              <Link className='button button-primary' href='/game-systems/'>EXPLORE GAME SYSTEMS <b aria-hidden='true'>&#8594;</b></Link>
+            </div>
+          )}
         </div>
       </section>
-
-      <DevlogFooter />
+      <SiteFooter />
     </main>
   );
 }

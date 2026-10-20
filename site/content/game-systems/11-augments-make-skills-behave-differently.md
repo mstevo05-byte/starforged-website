@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Augments: Make Skills Behave Differently"
 slug: augments-make-skills-behave-differently
 category: buildcraft

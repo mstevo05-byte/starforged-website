@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 number: 02
 title: "How Artefacts Shape Your Combat Kit"
 date: 2026-09-24

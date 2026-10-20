@@ -5,11 +5,12 @@ const navigation = [
   ['BUILD YOUR CHARACTER', '/#builds'],
   ['THE GALAXY', '/#galaxy'],
   ['FACTIONS', '/#factions'],
+  ['GAME SYSTEMS', '/game-systems/'],
   ['DEVLOG', '/devlog/'],
   ['COMMUNITY', '/#community'],
 ];
 
-export function DevlogHeader() {
+export function SiteHeader({ section }: { section: 'game-systems' | 'devlog' }) {
   return (
     <header className='site-header devlog-site-header'>
       <Link className='brand' href='/' aria-label='Starforged Ascendant home'>
@@ -18,7 +19,7 @@ export function DevlogHeader() {
 
       <nav className='desktop-nav' aria-label='Primary navigation'>
         {navigation.map(([label, href]) => (
-          <a key={href} href={href} aria-current={label === 'DEVLOG' ? 'page' : undefined}>{label}</a>
+          <a key={href} href={href} aria-current={href === '/' + section + '/' ? 'page' : undefined}>{label}</a>
         ))}
       </nav>
 
@@ -28,7 +29,7 @@ export function DevlogHeader() {
           <summary aria-label='Open navigation'><i /><i /><i /></summary>
           <nav aria-label='Mobile navigation'>
             {navigation.map(([label, href]) => (
-              <a key={href} href={href} aria-current={label === 'DEVLOG' ? 'page' : undefined}>{label}</a>
+              <a key={href} href={href} aria-current={href === '/' + section + '/' ? 'page' : undefined}>{label}</a>
             ))}
           </nav>
         </details>
@@ -37,7 +38,7 @@ export function DevlogHeader() {
   );
 }
 
-export function DevlogFooter() {
+export function SiteFooter() {
   return (
     <footer className='site-footer'>
       <div className='footer-main page-shell'>

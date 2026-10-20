@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Progression Through Missions"
 slug: progression-through-missions
 category: gameplay

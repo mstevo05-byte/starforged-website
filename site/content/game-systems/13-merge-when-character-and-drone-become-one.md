@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Merge: When Character and Drone Become One"
 slug: merge-when-character-and-drone-become-one
 category: character-drone

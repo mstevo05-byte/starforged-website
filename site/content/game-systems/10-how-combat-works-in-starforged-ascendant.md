@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "How Combat Works in Starforged Ascendant"
 slug: how-combat-works-in-starforged-ascendant
 category: gameplay

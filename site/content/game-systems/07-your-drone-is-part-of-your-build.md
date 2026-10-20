@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Your Drone Is Part of Your Build"
 slug: your-drone-is-part-of-your-build
 category: character-drone

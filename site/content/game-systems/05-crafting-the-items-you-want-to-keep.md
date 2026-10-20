@@ -1,5 +1,5 @@
 ---
-layout: devlog
+layout: game-system
 title: "Crafting the Items You Want to Keep"
 slug: crafting-the-items-you-want-to-keep
 category: buildcraft
