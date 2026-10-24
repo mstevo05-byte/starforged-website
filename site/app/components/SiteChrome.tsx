@@ -24,7 +24,7 @@ export function SiteHeader({ section }: { section: 'game-systems' | 'devlog' }) 
       </nav>
 
       <div className='header-actions'>
-        <a className='header-cta' href='https://discord.gg/zeEG7hZhj' target='_blank' rel='noopener noreferrer'>JOIN DISCORD</a>
+        <a className='header-cta' href='https://discord.gg/b9TBjgMzQr' target='_blank' rel='noopener noreferrer'>JOIN DISCORD</a>
         <details className='mobile-nav'>
           <summary aria-label='Open navigation'><i /><i /><i /></summary>
           <nav aria-label='Mobile navigation'>
@@ -52,7 +52,7 @@ export function SiteFooter() {
         </nav>
         <div className='footer-social'>
           <a href='https://www.reddit.com/r/StarforgedAscendant/' target='_blank' rel='noopener noreferrer'>REDDIT</a>
-          <a href='https://discord.gg/zeEG7hZhj' target='_blank' rel='noopener noreferrer'>DISCORD</a>
+          <a href='https://discord.gg/b9TBjgMzQr' target='_blank' rel='noopener noreferrer'>DISCORD</a>
           <a href='https://www.facebook.com/profile.php?id=61593854739318&amp;sk=about' target='_blank' rel='noopener noreferrer'>FACEBOOK</a>
         </div>
       </div>

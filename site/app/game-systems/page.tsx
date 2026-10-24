@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { SiteFooter, SiteHeader } from '../components/SiteChrome';
 import { getSystemDirectory, getVisibleSystemArticle } from '../../lib/game-systems';
 
@@ -10,6 +9,9 @@ export const metadata: Metadata = {
 
 export default function GameSystemsIndex() {
   const directory = getSystemDirectory();
+  const overviewEntry = directory.find((group) => group.key === 'start-here')?.entries[0];
+  const overview = overviewEntry ? getVisibleSystemArticle(overviewEntry.slug) : undefined;
+
   return (
     <main className='devlog-page' id='top'>
       <SiteHeader section='game-systems' />
@@ -21,20 +23,24 @@ export default function GameSystemsIndex() {
           <a className='devlog-scroll-link' href='#system-directory'>EXPLORE GAME SYSTEMS <b aria-hidden='true'>&#8595;</b></a>
         </div>
       </section>
-      <section className='devlog-directory' id='system-directory'>
-        <div className='devlog-directory-intro page-shell'>
-          <p className='section-number light'>GAME SYSTEMS DIRECTORY</p>
-          <h2>Explore by topic.</h2>
-          <p>Start with the game overview, then explore the connected systems. Follow implementation work in the <Link href='/devlog/'>Devlog</Link>.</p>
-        </div>
-        <div className='devlog-groups page-shell'>
-          {directory.map((group) => (
-            <section className='devlog-group' key={group.key} id={group.key} aria-labelledby={'system-group-' + group.key}>
+      <section className='devlog-directory system-directory' id='system-directory'>
+        <div className='system-directory-groups page-shell'>
+          {overview ? (
+            <a className='system-overview-banner' id='start-here' href={'/devlog/' + overview.slug + '/'} aria-labelledby='system-overview-title'>
+              <div className='system-overview-copy'>
+                <h2 id='system-overview-title'>{overview.title}</h2>
+                <p>{overview.summary}</p>
+                <span className='system-overview-arrow' aria-hidden='true'>&#8594;</span>
+              </div>
+              {overview.heroImage ? <img src={overview.heroImage} alt='' loading='lazy' width='480' height='270' /> : null}
+            </a>
+          ) : null}
+          {directory.filter((group) => group.key !== 'start-here').map((group) => (
+            <section className='system-topic-group' key={group.key} id={group.key} aria-labelledby={'system-group-' + group.key}>
               <header>
-                <span>{group.key === 'start-here' ? 'START HERE' : 'GAME SYSTEMS'}</span>
                 <h2 id={'system-group-' + group.key}>{group.title}</h2>
               </header>
-              <div className='devlog-topic-list'>
+              <div className='system-topic-grid'>
                 {group.entries.map((entry) => {
                   const article = getVisibleSystemArticle(entry.slug);
                   if (!article) return <div className='devlog-topic' key={entry.slug}><span className='devlog-topic-status'>NO PUBLISHED ARTICLE YET</span><strong>{entry.title}</strong></div>;

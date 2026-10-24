@@ -11,9 +11,9 @@ const navItems = [
 ];
 
 const buildTakeaways = [
-  ['01', 'CLASSLESS BUILDS', 'Combine systems around the role and playstyle you want.'],
-  ['02', 'CONFIGURABLE DRONE', 'Shape your Drone through its Weapon, Chassis and Thrusters.'],
-  ['03', 'TALENT SPECIALISATION', 'Specialise in primary stats, Power Cores, weapon and Armour types, or amplify your Drone.'],
+  ['01', 'CLASSLESS BUILDS', 'Combine systems around the role and playstyle you want.', '/game-systems/#buildcraft'],
+  ['02', 'CONFIGURABLE DRONE', 'Shape your Drone through its Weapon, Chassis and Thrusters.', '/game-systems/#character-and-drone'],
+  ['03', 'TALENT SPECIALISATION', 'Specialise in primary stats, Power Cores, weapon and Armour types, or amplify your Drone.', '/game-systems/#buildcraft'],
 ];
 
 const galaxySteps = [
@@ -46,7 +46,7 @@ function PillList({ items }: { items: string[] }) {
 
 export default function Home() {
   return (
-    <main>
+    <main className="home-page">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Starforged Ascendant home">
           <img src="/images/SA Logo - light.png" alt="Starforged Ascendant" width="190" height="54" />
@@ -57,7 +57,7 @@ export default function Home() {
         </nav>
 
         <div className="header-actions">
-          <a className="header-cta" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD</a>
+          <a className="header-cta" href="https://discord.gg/b9TBjgMzQr" target="_blank" rel="noopener noreferrer">JOIN DISCORD</a>
           <details className="mobile-nav">
             <summary aria-label="Open navigation"><i /><i /><i /></summary>
             <nav aria-label="Mobile navigation">
@@ -79,7 +79,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#game">EXPLORE THE GAME <b aria-hidden="true">&#8595;</b></a>
-            <a className="button button-ghost" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
+            <a className="button button-ghost" href="https://discord.gg/b9TBjgMzQr" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
           </div>
           <p className="hero-tags">
             <span>SCI-FI ACTION RPG</span><i /><span>CHARACTER BUILDING</span><i /><span>DRONES</span><i /><span>PROCEDURAL MISSIONS</span><i /><span>LIVING GALAXY</span>
@@ -129,7 +129,7 @@ export default function Home() {
         <article className="cinematic-panel fight-panel reverse page-shell">
           <div className="cinematic-copy">
             <Label>EVERY MISSION HAS A COST</Label>
-            <h3>Fight for Your Survival</h3>
+            <h3><a className="homepage-heading-link" href="/game-systems/#gameplay">Fight for Your Survival</a></h3>
             <p>Enter dangerous Missions with your Character and Drone and take on forces with their own technologies, tactics and combat identities.</p>
             <p>Complete Objectives, adapt to the battlefield, recover valuable Artefacts and resources, and extract with what you have earned.</p>
             <PillList items={['Character + Drone', 'Skills', 'Objectives', 'Loot', 'Extraction']} />
@@ -178,7 +178,7 @@ export default function Home() {
               <h2>Follow the Journey</h2>
               <p>Get development updates, future playtest opportunities and major Starforged Ascendant news.</p>
             </div>
-            <a className="button button-dark" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
+            <a className="button button-dark" href="https://discord.gg/b9TBjgMzQr" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
           </div>
         </aside>
       </section>
@@ -192,21 +192,21 @@ export default function Home() {
           <p className="lead">A Mission begins before you step through the gateway.</p>
         </div>
         <div className="mission-grid page-shell">
-          <article>
+          <a className="mission-card homepage-card-link" href="/game-systems/#gameplay">
             <div className="mission-image"><img src="/images/Plan the mission.webp" alt="Choosing a Mission" loading="lazy" sizes="(max-width: 1080px) 100vw, 33vw" /><span>01</span></div>
-            <h3>Choose</h3>
+            <h3>Choose <span className="homepage-link-arrow" aria-hidden="true">&#8594;</span></h3>
             <p>Select the Mission, understand the Objective and decide which opportunity you want to pursue.</p>
-          </article>
-          <article>
+          </a>
+          <a className="mission-card homepage-card-link" href="/game-systems/#buildcraft">
             <div className="mission-image"><img src="/images/Prepare for battle.webp" alt="Preparing a build for battle" loading="lazy" sizes="(max-width: 1080px) 100vw, 33vw" /><span>02</span></div>
-            <h3>Prepare</h3>
+            <h3>Prepare <span className="homepage-link-arrow" aria-hidden="true">&#8594;</span></h3>
             <p>Configure your Character, Artefacts and Drone for what lies ahead.</p>
-          </article>
-          <article>
+          </a>
+          <a className="mission-card homepage-card-link" href="/game-systems/#gameplay">
             <div className="mission-image"><img src="/images/Deploy.webp" alt="Deploying through a gateway" loading="lazy" sizes="(max-width: 1080px) 100vw, 33vw" /><span>03</span></div>
-            <h3>Deploy</h3>
+            <h3>Deploy <span className="homepage-link-arrow" aria-hidden="true">&#8594;</span></h3>
             <p>Cross the gateway and enter the Mission with your Character and Drone.</p>
-          </article>
+          </a>
         </div>
       </section>
 
@@ -214,20 +214,21 @@ export default function Home() {
         <div className="build-head page-shell">
           <p className="section-number light">03 / BUILD YOUR CHARACTER</p>
           <div className="build-title-row">
-            <h2>Build Without<br /><span>Boundaries.</span></h2>
+            <h2><a className="homepage-heading-link" href="/game-systems/#buildcraft">Build Without<br /><span>Boundaries.</span></a></h2>
             <p>Your Character is shaped by the systems you combine. Equip Artefacts that provide your Skills, shape those Skills with Power Cores and Augments, specialise through Talent Trees, and configure your Drone to complement the role you want to fulfil.</p>
           </div>
         </div>
-        <div className="build-visual page-shell">
+        <a className="build-visual page-shell homepage-image-link" href="/game-systems/#buildcraft" aria-label="Explore buildcraft game systems">
           <img src="/images/SA Build customisation.webp" alt="Starforged Ascendant character build customisation system" loading="lazy" sizes="(max-width: 700px) 100vw, 80vw" />
           <span className="technical-note">CHARACTER SYSTEM / MODULAR LOADOUT</span>
-        </div>
+          <span className="homepage-image-arrow" aria-hidden="true">&#8594;</span>
+        </a>
         <div className="systems-grid page-shell">
-          {buildTakeaways.map(([number, title, copy]) => (
-            <article key={title}>
+          {buildTakeaways.map(([number, title, copy, href]) => (
+            <a className="build-card homepage-card-link" href={href} key={title}>
               <span>{number}</span>
-              <div><h3>{title}</h3><p>{copy}</p></div>
-            </article>
+              <div><h3>{title} <span className="homepage-link-arrow" aria-hidden="true">&#8594;</span></h3><p>{copy}</p></div>
+            </a>
           ))}
         </div>
         <div className="roles page-shell">
@@ -268,9 +269,10 @@ export default function Home() {
           </div>
           <p>Your victories, failures and alliances feed back into the wider galaxy. Mission outcomes can strengthen your influence, change faction pressure, create new opportunities and help establish the footholds that let you push further.</p>
         </div>
-        <div className="galaxy-visual page-shell">
+        <a className="galaxy-visual page-shell homepage-image-link" href="/game-systems/" aria-label="Explore the connected game systems">
           <img src="/images/SA Gameplay loop.webp" alt="The connected Starforged Ascendant gameplay loop" loading="lazy" sizes="(max-width: 700px) 100vw, 80vw" />
-        </div>
+          <span className="homepage-image-arrow" aria-hidden="true">&#8594;</span>
+        </a>
         <ol className="galaxy-steps page-shell">
           {galaxySteps.map((title, index) => (
             <li key={title}><span>0{index + 1}</span><h3>{title}</h3></li>
@@ -307,7 +309,7 @@ export default function Home() {
             <h2>Join the Fight</h2>
             <p className="community-lead">Follow development, share feedback and get opportunities to take part as Starforged Ascendant grows.</p>
             <div className="community-actions">
-              <a className="button button-dark" href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
+              <a className="button button-dark" href="https://discord.gg/b9TBjgMzQr" target="_blank" rel="noopener noreferrer">JOIN DISCORD <b aria-hidden="true">&#8599;</b></a>
             </div>
             <nav className="community-links" aria-label="Starforged Ascendant community links">
               <a href="https://www.reddit.com/r/StarforgedAscendant/" target="_blank" rel="noopener noreferrer">REDDIT</a>
@@ -325,7 +327,7 @@ export default function Home() {
           </nav>
           <div className="footer-social">
             <a href="https://www.reddit.com/r/StarforgedAscendant/" target="_blank" rel="noopener noreferrer">REDDIT</a>
-            <a href="https://discord.gg/zeEG7hZhj" target="_blank" rel="noopener noreferrer">DISCORD</a>
+            <a href="https://discord.gg/b9TBjgMzQr" target="_blank" rel="noopener noreferrer">DISCORD</a>
             <a href="https://www.facebook.com/profile.php?id=61593854739318&amp;sk=about" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
           </div>
         </div>

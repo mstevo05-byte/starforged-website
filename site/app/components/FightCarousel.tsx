@@ -38,7 +38,7 @@ export default function FightCarousel() {
   }, [reduceMotion]);
 
   return (
-    <div className="cinematic-image fight-visual">
+    <a className="cinematic-image fight-visual homepage-image-link" href="/game-systems/#gameplay" aria-label="Explore combat and Mission game systems">
       {fightImages.map(([src, alt], index) => (
         <img
           className={index === activeIndex ? 'is-active' : undefined}
@@ -52,6 +52,7 @@ export default function FightCarousel() {
       ))}
       <span className="image-index">02</span>
       <span className="cycle-label">FACTION ENCOUNTERS / ROTATING FEED</span>
-    </div>
+      <span className="homepage-image-arrow" aria-hidden="true">&#8594;</span>
+    </a>
   );
 }

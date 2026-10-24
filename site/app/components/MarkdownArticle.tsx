@@ -47,7 +47,7 @@ function splitTableRow(line: string) {
 }
 
 export default function MarkdownArticle({ source }: { source: string }) {
-  const lines = source.replace(/\r\n/g, '\n').split('\n');
+  const lines = source.replace(/<!--[\s\S]*?-->/g, '').replace(/\r\n/g, '\n').split('\n');
   const blocks: ReactNode[] = [];
   let index = 0;
 
