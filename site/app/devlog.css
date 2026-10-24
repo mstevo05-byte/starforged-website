@@ -279,10 +279,15 @@
 
 /* Shared content navigation and the separate Game Systems / Devlog directories. */
 .site-header .desktop-nav { gap: clamp(14px, 1.4vw, 25px); }
-@media (min-width: 1081px) and (max-width: 1430px) {
-  .site-header { grid-template-columns: 1fr auto; padding: 0 26px; }
-  .site-header .desktop-nav { display: none; }
-  .site-header .mobile-nav { display: block; }
+@media (min-width: 701px) and (max-width: 1430px) {
+  html { scroll-padding-top: 132px; }
+  section[id], form[id] { scroll-margin-top: 132px; }
+  .site-header { height: 132px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 54px 1fr; gap: 8px 20px; padding: 10px 26px; }
+  .site-header .brand { grid-column: 1; grid-row: 1; }
+  .site-header .header-actions { grid-column: 2; grid-row: 1; }
+  .site-header .desktop-nav { grid-column: 1 / -1; grid-row: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; }
+  .site-header .desktop-nav a { white-space: nowrap; }
+  .site-header .mobile-nav { display: none; }
 }
 .devlog-group > header h2 { margin: 48px 0 0; font-family: Manrope, Inter, Arial, sans-serif; font-size: 34px; line-height: 1.05; }
 .devlog-directory-intro a { color: var(--solar); text-decoration: underline; text-underline-offset: 4px; }

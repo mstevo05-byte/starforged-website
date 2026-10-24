@@ -26,11 +26,12 @@ export function SiteHeader({ section }: { section: 'game-systems' | 'devlog' }) 
       <div className='header-actions'>
         <a className='header-cta' href='https://discord.gg/b9TBjgMzQr' target='_blank' rel='noopener noreferrer'>JOIN DISCORD</a>
         <details className='mobile-nav'>
-          <summary aria-label='Open navigation'><i /><i /><i /></summary>
+          <summary><span>MENU</span><span className='mobile-nav-icon' aria-hidden='true'><i /><i /><i /></span></summary>
           <nav aria-label='Mobile navigation'>
             {navigation.map(([label, href]) => (
               <a key={href} href={href} aria-current={href === '/' + section + '/' ? 'page' : undefined}>{label}</a>
             ))}
+            <a href='https://discord.gg/b9TBjgMzQr' target='_blank' rel='noopener noreferrer'>JOIN DISCORD</a>
           </nav>
         </details>
       </div>
